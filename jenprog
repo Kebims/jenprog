@@ -58,16 +58,16 @@ parser.add_option('-e', '--erase', dest='erase', action='store_true',
 parser.add_option('-c', '--connection', type='choice', dest='conn', default='serial', choices=conns,
                   help='connection implementation ('+",".join(conns)+') [default: %default]')
 parser.add_option('-t', '--target', type='string', help='target for connection', dest='target')
-parser.add_option('--reset-pin', type='int', help='pin number of reset line for ftdi-type connections (default=5)',
+parser.add_option('--reset-pin', type='int', help='pin number of reset line (default=5)',
                   default=5, dest='RESET')
-parser.add_option('--spimiso-pin', type='int', help='pin number of spimiso line for ftdi-type connections (default=4)',
+parser.add_option('--spimiso-pin', type='int', help='pin number of spimiso line (default=4)',
                   default=4, dest='SPIMISO')
 
 (options, args) = parser.parse_args()
 
 if options.conn=='serial':
     import con_serial
-    bl = con_serial.SerialBootloader(options.target)
+    bl = con_serial.SerialBootloader(options.target,options.RESET, options.SPIMISO)
 elif options.conn=='ipv6':
     import con_ipv6
     bl = con_ipv6.IPBootloader(options.target)

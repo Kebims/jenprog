@@ -42,7 +42,7 @@ class SerialBootloader(JennicProtocol):
     def __init__(self, devname):
         self.DEFAULT_TIMEOUT = .2
         self.MAX_TIMEOUT     = 10
-        if devname==None: devname='/dev/ttyUSB0'
+        if devname==None: devname='/dev/ttyS1'
 
         sys.stdout.write("waiting for %s.."%devname)
         sys.stdout.flush()
